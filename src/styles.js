@@ -18,19 +18,19 @@ export const numberItem = StyleSheet.create({
     borderRadius: 6,
     
     width: Dimensions.get('window').width / 2.7,
-    height: Dimensions.get('window').height / 6.1,
+    height: Dimensions.get('window').height / 13,
     justifyContent: 'center',
     alignContent: 'center',
     // flexWrap: 'wrap',
     borderWidth: 1,
     borderColor: "#2196f3",
-    margin: 27,
+    margin: 3,
   },
   text: {
     fontWeight: 'bold',
     
     alignSelf: 'center',
-    fontSize: 36,
+    fontSize: 16,
   },
   poemContainer: {
     justifyContent: 'center',

@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 
 import {
   EnterPoem,
+  GetStarted,
   PeriodPoem,
   Interested,
   Begin,
@@ -94,8 +95,8 @@ function Router() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="EnterPoe" component={EnterPoem} />
-        <Stack.Screen name="Period" component={PeriodPoem} />
+        <Stack.Screen name="GetStarted" component={GetStarted} />
+        <Stack.Screen name="EnterPoem" component={EnterPoem} />
         <Stack.Screen name="Interest" component={Interested} />
         <Stack.Screen name="Begin" component={Begin} />
         <Stack.Screen name="App" component={App} />
