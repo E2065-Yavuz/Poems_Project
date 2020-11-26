@@ -24,46 +24,62 @@ const numbers = [
 
 const newDate = new Date();
 
-
-//End Date > Start Date
-// Baslangıc degerleri asystorageden cekilecek
-
 const EnterPoem = ({navigation}) => {
-  // const [firstTimes, setFirstTimes] = useState(newDate.setHours(3, 0));
-  
-  
-  
-  
-  const getData = async () => {
-    try {
-       const value = await AsyncStorage.getItem('@startHour')
-      if(value !== null) {
-        setStartTimes(newDate.setHours(parseInt(value), 0))
-        console.warn(parseInt(value))
-      }
-    } catch(e) {
-      // error reading value
-    }
-  }
-
-React.useEffect(()=>{
-  getData()
-}),[]
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isDatePickerVisibleEnd, setDatePickerVisibilityEnd] = useState(false);
-  const [firstTimes, setStartTimes] = useState(newDate.setHours(4, 0));
-  
-  const [endTimes, setEndTimes] = useState(newDate.setHours(23, 0));
+  const [firstTimes, setStartTimes] = useState(newDate.setHours(9,0));
+  const [endTimes, setEndTimes] = useState(newDate.setHours(11,0));
   const [counter, setCounter] = useState(1);
+  const[yeni,setYeni]=useState()
 
+  const getData = async () => {
+    let savedTimeStart = await AsyncStorage.getItem('@startHour')
+   
+   setStartTimes(newDate.setHours(parseInt(savedTimeStart),0))
+  
+}
+  const endData = async () => {
+    let savedTimeEnd = await AsyncStorage.getItem('@endHour')
+  
+   setEndTimes(newDate.setHours(parseInt(savedTimeEnd),0))
+  //  console.log(savedTimeEnd)
+  
+}
+  const howMany = async () => {
+    let savedCount = await AsyncStorage.getItem('@howMany')
+  
+   setCounter((parseInt(savedCount)))
+  
+}
+// console.log(new Date(firstTimes).getHours())
 
+React.useEffect(()=>{
+  getData(),endData(),howMany()
+  console.log("çağır")
+},[yeni])
 
+// console.log(parseInt(moment(firstTimes).format('LT').split(" ").shift()))
 
+const storeData = async (value) => {
+  try {
+    const startHour = JSON.stringify(new Date(firstTimes).getHours())
+    const endHour = JSON.stringify(new Date(endTimes).getHours())
+    const count = JSON.stringify(counter)
+    await AsyncStorage.setItem('@startHour', startHour)
+    await AsyncStorage.setItem('@endHour', endHour)
+    await AsyncStorage.setItem('@howMany', count)
+  } catch (e) {
+    console.warn("Hata",e)
+  }
+}
 
 
   function selectPage() {
-    navigation.navigate('Interest');
-    
+    storeData()
+    navigation.navigate("Interest")
+ 
+  
+
   }
 
   const showDatePicker = () => {
@@ -81,12 +97,36 @@ React.useEffect(()=>{
   };
 
   const handleConfirm = (date) => {
-    setStartTimes(date);
-    hideDatePicker();
+    // console.log(date)
+    if(endTimes<date){
+      hideDatePicker()
+      alert("ALAAARRRMMMMMM")
+
+    }
+
+    else{
+
+      setStartTimes(date);
+      hideDatePicker();
+    }
   };
+
+  
   const handleConfirms = (param) => {
-    setEndTimes(param);
-    hideDatePickerEnd();
+    if(firstTimes>param){
+      hideDatePickerEnd()
+      alert("ALAAARRRMMMMMM")
+      
+    }
+    
+    else{
+      
+      setEndTimes(param);
+      // console.log(new Date(param).getHours())
+      hideDatePickerEnd();
+    }
+
+    
   };
 
   return (
@@ -154,6 +194,7 @@ React.useEffect(()=>{
                   mode="time"
                   onConfirm={handleConfirm}
                   onCancel={hideDatePicker}
+                  is24Hour={true}
                 />
               </View>
             </View>
@@ -166,14 +207,16 @@ React.useEffect(()=>{
 
             <View style={styles.sectionSecondBox}>
               <View style={styles.clock}>
+              
                 <TouchableOpacity onPress={showDatePickerEnd}>
-                  <Text>{moment(endTimes).format('LT')}</Text>
+                  <Text> {moment(endTimes).format('LT')} </Text>
                 </TouchableOpacity>
                 <DateTimePickerModal
                   isVisible={isDatePickerVisibleEnd}
                   mode="time"
                   onConfirm={handleConfirms}
                   onCancel={hideDatePickerEnd}
+                  is24Hour={true}
                 />
               </View>
             </View>

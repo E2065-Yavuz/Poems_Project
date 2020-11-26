@@ -20,10 +20,16 @@ const GetStarted = ({navigation}) => {
     try {
       const jsonValue = JSON.stringify(0)
       const startHour = JSON.stringify(5)
+      const startMin = JSON.stringify(0)
       const endHour = JSON.stringify(23)
+      const endMin = JSON.stringify(0)
+      const count = JSON.stringify(5)
       await AsyncStorage.setItem('@isAsyncStorageSet', jsonValue)
       await AsyncStorage.setItem('@startHour', startHour)
+      await AsyncStorage.setItem('@startMin', startMin)
       await AsyncStorage.setItem('@endHour', endHour)
+      await AsyncStorage.setItem('@endMin', endMin)
+      await AsyncStorage.setItem('@howMany', count)
     } catch (e) {
       console.warn("Hata",e)
     }
@@ -49,7 +55,7 @@ const GetStarted = ({navigation}) => {
       storeData()
       }
       else{
-        // console.warn(value)
+      
         // if(value==="1"){
         //  navigation.navigate('App')};
       }
@@ -83,10 +89,15 @@ export {GetStarted};
 const styles = StyleSheet.create({
   text: {
     position: 'absolute',
-    left: 8,
-    top: 270,
+    // textAlign:"center",
+    top:height*0.74,
+    left:width*0.20,
+    
     fontSize: 40,
     fontFamily: 'Satisfy-Regular',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 8,
   },
   getView: {
     flex: 1,
