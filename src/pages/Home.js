@@ -1,14 +1,55 @@
 import React from 'react';
-import {SafeAreaView, View, Text, TouchableOpacity} from 'react-native';
+import {SafeAreaView, View, Text, TouchableOpacity, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {beginItem, button} from '../styles';
+import {CardComponent} from '../components'
 
 const Home = (props) => {
-  return (
-    <SafeAreaView style={{flex: 1, backgroundColor:"black"}}>
+
+  const renderCardComponent = ({item}) => {
+    return(
       <View>
-        <Text style={{color:"white"}}>HomePage</Text>
+        <CardComponent
+        onSelect={()=>props.navigation.navigate('DetailPage')}
+        />
+        <CardComponent
+        onSelect={()=>props.navigation.navigate('Bookmark')}
+        />
+        <CardComponent
+        onSelect={()=>props.navigation.navigate('Bookmark')}
+        />
+        <CardComponent
+        onSelect={()=>props.navigation.navigate('Bookmark')}
+        />
+        <CardComponent
+        onSelect={()=>props.navigation.navigate('Bookmark')}
+        />
+        <CardComponent
+        onSelect={()=>props.navigation.navigate('Bookmark')}
+        />
+        <CardComponent
+        onSelect={()=>props.navigation.navigate('Bookmark')}
+        />
+
       </View>
+    )
+  }
+  return (
+    <SafeAreaView>
+      <View>
+        
+        <FlatList
+          keyExtractor={(_, index) => index.toString()}
+          data={CardComponent}
+          renderItem={renderCardComponent}
+        
+        />
+       
+
+      </View>
+
+
+
     </SafeAreaView>
   );
 };

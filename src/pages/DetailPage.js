@@ -1,9 +1,15 @@
 import React from 'react';
-import {SafeAreaView, View, Text,ImageBackground,StyleSheet,Dimensions, TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {beginItem, button} from '../styles';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Dimensions,
+  ImageBackground,
+  TouchableWithoutFeedback,
+} from 'react-native';
 
-const Bookmark = (props) => {
+const DetailPage = (props) => {
   return (
     <View>
       <ImageBackground
@@ -32,13 +38,12 @@ const Bookmark = (props) => {
     </View>
   );
 };
-
-export {Bookmark};
+export {DetailPage};
 
 const styles = StyleSheet.create({
-  image:{
-    width: Dimensions.get('window').width * 0.9,
-    height: Dimensions.get('window').height * 0.25,
-    resizeMode: 'cover',
-  }
-})
+    image:{
+      width: Dimensions.get('window').width * 0.9,
+      height: Dimensions.get('window').height * 0.25,
+      resizeMode: 'cover',
+    }
+  })

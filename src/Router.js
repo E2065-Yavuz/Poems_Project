@@ -4,7 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SplashScreen from 'react-native-splash-screen';
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 
 import {
   EnterPoem,
@@ -17,62 +17,61 @@ import {
   Themes,
   Search,
   Settings,
+  DetailPage,
 } from './pages';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function App() {
-
-
-  useEffect( () => {
-    SplashScreen.hide()
+  useEffect(() => {
+    SplashScreen.hide();
   }, []);
-  
+
   return (
     <Tab.Navigator
       tabBarOptions={{
+        activeTintColor:'#d11921',
+        inactiveTintColor:'black',
         labelStyle: {
-          color: 'black',
-          fontWeight: 'bold',
-          fontSize: 14,
+          fontSize: 10,
+          paddingBottom: 5,
+          // color: 'blue',
+          // fontWeight: 'bold',
         },
-        inactiveBackgroundColor: 'lightgrey',
-        // activeTintColor: "red",
-        activeBackgroundColor: 'blue',
+        // inactiveBackgroundColor: 'lightgrey',
+        // activeBackgroundColor: '#e0e0e0',
+        
       }}>
       <Tab.Screen
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: () => (
-            <Icon name="home-outline" color={'black'} size={30} />
-          ),
+          tabBarIcon: ({color}) => <Icon name="feather" color={color} size={20}/>,
         }}
         name="Home"
-        component={Home}
-      />
+        component={Home}>
+        {/* <NavigationContainer>
+        <Tab.Screen name="DetailPage" component={DetailPage} />
+        </NavigationContainer> */}
+        </Tab.Screen>
+
       <Tab.Screen
         options={{
           tabBarLabel: 'Bookmark',
-          tabBarIcon: () => (
-            <Icon name="bookmark-outline" color={'black'} size={30} />
+          tabBarIcon: ({color}) => (
+            <Icon name="book-outline" color={color} size={20} />
           ),
         }}
         name="Bookmark"
         component={Bookmark}
       />
+
       <Tab.Screen
         options={{
-          tabBarLabel: 'Search',
-          tabBarIcon: () => <Icon name="magnify" color={'black'} size={30} />,
-        }}
-        name="Search"
-        component={Search}
-      />
-      <Tab.Screen
-        options={{
-          tabBarLabel: 'Themes',
-          tabBarIcon: () => <Icon name="wallpaper" color={'black'} size={30} />,
+          tabBarLabel: 'Browse',
+          tabBarIcon: ({color}) => (
+            <Icon name="book-open-page-variant" color={color} size={20} />
+          ),
         }}
         name="Themes"
         component={Themes}
@@ -80,9 +79,7 @@ function App() {
       <Tab.Screen
         options={{
           tabBarLabel: 'Settings',
-          tabBarIcon: () => (
-            <Icon name="account-settings-outline" color={'black'} size={30} />
-          ),
+          tabBarIcon: ({color}) => <Icon name="cog" color={color} size={20} />,
         }}
         name="Settings"
         component={Settings}
