@@ -32,7 +32,7 @@ function App() {
     <Tab.Navigator
       tabBarOptions={{
         activeTintColor:'#d11921',
-        inactiveTintColor:'black',
+        // inactiveTintColor:'black',
         labelStyle: {
           fontSize: 10,
           paddingBottom: 5,

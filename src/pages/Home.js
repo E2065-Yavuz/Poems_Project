@@ -10,7 +10,7 @@ const Home = (props) => {
     return(
       <View>
         <CardComponent
-        onSelect={()=>props.navigation.navigate('DetailPage')}
+        onSelect={()=>props.navigation.navigate('Bookmark')}
         />
         <CardComponent
         onSelect={()=>props.navigation.navigate('Bookmark')}
